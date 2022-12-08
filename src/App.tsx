@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState } from 'react';
+import './App.scss';
+import { binaryNumbVal } from './utilities/numberValidations';
+import { substraction } from './utilities/substraction';
 
 function App() {
+  const [result, setResult] = useState<String>('');
+
+  const test = () => {
+    const val1 = input1Ref.current?.value;
+    const val2 = input2Ref.current?.value;
+    const  correctVal1  = binaryNumbVal(val1);
+    const  correctVal2  = binaryNumbVal(val2);
+    if (val1 === undefined || val2 === undefined) {
+      console.log('err');
+      return;
+    }
+    const res = substraction(correctVal1.split(''), correctVal2.split(''));
+    setResult(JSON.stringify(res));
+  };
+  const input1Ref = useRef<HTMLInputElement>(null);
+  const input2Ref = useRef<HTMLInputElement>(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <input type='text' ref={input1Ref} />
+      <input type='text' ref={input2Ref} />
+      <button onClick={test}>calc</button>
+      <pre>{result}</pre>
+      
     </div>
   );
 }
