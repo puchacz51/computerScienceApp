@@ -1,6 +1,7 @@
 export const substraction = (numberA: string[], numberB: string[]) => {
   // if length a is smaller than length b
-  if (numberA.length < numberB.length) return { error: '' };
+  if (numberA.length < numberB.length)
+    return { result: null, higherIndex: null };
 
   const lengthB = numberB.length;
   const lengthA = numberA.length;
@@ -8,8 +9,7 @@ export const substraction = (numberA: string[], numberB: string[]) => {
   let indexB = lengthB;
   let indexA: number;
   const result: string[] = [];
-  const higherIndex =  Array(lengthA).fill([])
-
+  const higherIndex = Array(lengthA).fill([]) as string[][];
 
   while (indexB--) {
     indexA = indexB + lengthDiff;
@@ -26,17 +26,17 @@ export const substraction = (numberA: string[], numberB: string[]) => {
 
       while (--j >= 0) {
         console.log(j);
-        console.log(numberA[j],'ll');
+        console.log(numberA[j], 'll');
 
-        if (numberA[j]==='1') {
+        if (numberA[j] === '1') {
           numberA[j] = '0';
-          higherIndex[j].push('0')
+          higherIndex[j].push('0');
           result.push('1');
 
           while (j++ <= indexA) {
             numberA[indexA] = '1';
-            console.log(numberA,'numberA');
-            
+            higherIndex[j].push('2');
+            console.log(numberA, 'numberA');
           }
           break;
         }

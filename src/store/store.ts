@@ -1,13 +1,13 @@
-import create from 'zustand/react';
-import { createOperationSlice } from './operationSlice';
-type StateFromFunctions<T extends [...any]> = T extends [infer F, ...infer R]
-  ? F extends (...args: any) => object
-    ? StateFromFunctions<R> & ReturnType<F>
-    : unknown
-  : unknown;
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import operationSlice from './operationSlice';
 
-type StoreState = StateFromFunctions<[typeof createOperationSlice]>;
-
-export const useBinaryStore = create<StoreState>((set, get) => ({
-  ...createOperationSlice(set, get),
-}));
+export const store = configureStore({
+  reducer: {
+    operation: operationSlice,
+  },
+});
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+type TypedSelector = TypedUseSelectorHook<RootState>;
+export const useMySelector: TypedSelector = useSelector;

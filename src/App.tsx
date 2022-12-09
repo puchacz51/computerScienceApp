@@ -1,33 +1,52 @@
 import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './App.scss';
+import { NumberEqution } from './components/BinaryDevisor';
+import { setNumberA, setNumberB, substract } from './store/operationSlice';
+import { useMySelector } from './store/store';
 import { binaryNumbVal } from './utilities/numberValidations';
 import { substraction } from './utilities/substraction';
 
 function App() {
-  const [result, setResult] = useState<String>('');
+  const dispatch = useDispatch();
+  const { numberB, numberA, result } = useMySelector(
+    (state) => state.operation
+  );
 
   const test = () => {
-    const val1 = input1Ref.current?.value;
-    const val2 = input2Ref.current?.value;
-    const  correctVal1  = binaryNumbVal(val1);
-    const  correctVal2  = binaryNumbVal(val2);
-    if (val1 === undefined || val2 === undefined) {
-      console.log('err');
-      return;
-    }
-    const res = substraction(correctVal1.split(''), correctVal2.split(''));
-    setResult(JSON.stringify(res));
+    // const val1 = input1Ref.current?.value;
+    // const val2 = input2Ref.current?.value;
+
+    // if (val1 === undefined || val2 === undefined) {
+    //   console.log('err');
+    //   return;
+    // }
+    // const res = substraction(correctVal1.split(''), correctVal2.split(''));
+    // setResult(JSON.stringify(res));
+
+    dispatch(substract())
+
+
   };
   const input1Ref = useRef<HTMLInputElement>(null);
   const input2Ref = useRef<HTMLInputElement>(null);
 
   return (
     <div className='App'>
-      <input type='text' ref={input1Ref} />
-      <input type='text' ref={input2Ref} />
+      <input
+        type='text'
+        onChange={(e) => dispatch(setNumberA(e.currentTarget.value))}
+        value={numberA || ''}
+        ref={input1Ref}
+      />
+      <input
+        onChange={(e) => dispatch(setNumberB(e.currentTarget.value))}
+        type='text'
+        value={numberB || ''}
+        ref={input2Ref}
+      />
       <button onClick={test}>calc</button>
-      <pre>{result}</pre>
-      
+      {result && <NumberEqution />}
     </div>
   );
 }

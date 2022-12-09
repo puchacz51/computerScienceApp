@@ -1,3 +1,6 @@
+import { useSelector, TypedUseSelectorHook } from 'react-redux';
+import { RootState, useMySelector } from '../store/store';
+
 const BinaryDevider = () => {};
 interface NumberEqutionProps {
   numberA: string;
@@ -5,21 +8,20 @@ interface NumberEqutionProps {
   result: string;
   higherIndex: string[][];
 }
+type TypedSelecor = TypedUseSelectorHook<RootState>;
 
-export const NumberEqution = ({
-  numberA,
-  numberB,
-  result,
-  higherIndex,
-}: NumberEqutionProps) => {
+export const NumberEqution = () => {
+  const { numberA, result, numberB } = useMySelector(
+    (state) => state.operation
+  );
   return (
     <div className='numberEquation'>
-      <div className="higherIndex">
-        {higherIndex.map((index) => (
+      <div className='higherIndex'>
+        {result?.higherIndex?.map((index) => (
           <p>{index.join()}</p>
         ))}
       </div>
-      <p>{result}</p>
+      <p>{result?.result}</p>
     </div>
   );
 };
