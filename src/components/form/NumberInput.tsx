@@ -1,6 +1,5 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { useFormContext } from 'react-hook-form';
-
 interface NumberInputProps {
   name: string;
 }
@@ -14,7 +13,7 @@ export const NumberInput = ({ name }: NumberInputProps) => {
   return (
     <label htmlFor={name}>
       <input type='text' {...register(name)} name={name} />
-      <ErrorMessage name={`${name}errors}`} errors={errors} />
+      <ErrorMessage name={`${name}error`} errors={errors} />
     </label>
   );
 };

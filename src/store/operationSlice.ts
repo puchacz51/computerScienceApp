@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { validate } from 'json-schema';
 import { binaryNumbVal } from '../utilities/numberValidations';
 import { substraction } from '../utilities/substraction';
 export interface OperationSlice {
@@ -16,13 +17,22 @@ const operationSlice = createSlice({
   name: 'operation',
   initialState,
   reducers: {
-    substract: (state) => {
-      if (state.numberA === null || state.numberB === null) return;
-      const result = substraction(
-        state.numberA.split(''),
-        state.numberB.split('')
-      );
-      console.log(result);
+    substract: (
+      state,
+      action: PayloadAction<{ numberA: string; numberB: string }>
+    ) => {
+      console.log(action);
+      
+      const numberA = binaryNumbVal(action.payload.numberA);
+      const numberB = binaryNumbVal(action.payload.numberB);
+
+      if (numberA === null || numberB === null) return;
+      setNumberA(numberA);
+      setNumberB(numberB);
+      console.log('kola');
+      
+      const result = substraction(numberA.split(''), numberB.split(''));
+      console.log(result,'xxxx');
       
       state.result = result;
     },

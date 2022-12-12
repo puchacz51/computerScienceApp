@@ -8,12 +8,12 @@ import { binaryNumbVal } from './utilities/numberValidations';
 import { substraction } from './utilities/substraction';
 import OperationForm from './components/form/OperationForm';
 function App() {
-  const dispatch = useDispatch();
   const { result } = useMySelector((state) => state.operation);
   return (
     <div className='App'>
       <OperationForm />
-      {result && <pre>{JSON.stringify(result)}</pre>}
+      xxx
+      {result && <pre>{JSON.stringify(result)}</pre>}xxx
     </div>
   );
 }

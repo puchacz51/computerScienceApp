@@ -21,6 +21,7 @@ export const NumberEqution = () => {
           <p>{index.join()}</p>
         ))}
       </div>
+      o
       <p>{result?.result}</p>
     </div>
   );

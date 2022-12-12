@@ -1,3 +1,5 @@
+import { array } from 'yup';
+
 export const substraction = (numberA: string[], numberB: string[]) => {
   // if length a is smaller than length b
   if (numberA.length < numberB.length)
@@ -9,7 +11,9 @@ export const substraction = (numberA: string[], numberB: string[]) => {
   let indexB = lengthB;
   let indexA: number;
   const result: string[] = [];
-  const higherIndex = Array(lengthA).fill([]) as string[][];
+  const higherIndex = new Array(4).fill([]);
+  let heightIndex = 0;
+  console.log(higherIndex, 22);
 
   while (indexB--) {
     indexA = indexB + lengthDiff;
@@ -23,33 +27,36 @@ export const substraction = (numberA: string[], numberB: string[]) => {
       // if a bit = 0 b bit =1 result = 1
       let j = indexA;
       // find first older bit with 1 value
+      console.log(heightIndex, 22);
 
       while (--j >= 0) {
-        console.log(j);
-        console.log(numberA[j], 'll');
-
         if (numberA[j] === '1') {
           numberA[j] = '0';
+          console.log(j, 'xxx');
           higherIndex[j].push('0');
           result.push('1');
-
-          while (j++ <= indexA) {
-            numberA[indexA] = '1';
+          while (++j <= indexA) {
+            console.log(j, 'llll', indexA);
+            numberA[j] = '1';
             higherIndex[j].push('2');
+            higherIndex[j].push('1');
             console.log(numberA, 'numberA');
           }
           break;
         }
       }
+      heightIndex++;
     }
   }
   indexA = lengthDiff;
   while (indexA--) {
     result.push(numberA[indexA]);
   }
+  console.log('polska');
 
   return {
     result: result.reverse().join(''),
     higherIndex,
   };
 };
+// [[0],[2,1],[2,1]]
