@@ -14,17 +14,24 @@ export const NumberEqution = () => {
   const { numberA, result, numberB } = useMySelector(
     (state) => state.operation
   );
+
+  if(!result) return <div>sdasd</div>
+  const { result: resultNumber, higherIndex } = result;
+  
+
+
   return (
     <div className='numberEquation'>
       <div className='higherIndex'>
-        {result?.higherIndex?.map((index) => (
+        {higherIndex?.map((index) => (
           <p>{index.join()}</p>
         ))}
       </div>
-      o
-      <p>{result?.result}</p>
+      <p>{numberA}</p>
+      <p>{numberB}</p>
+
+      <p>{resultNumber}</p>
     </div>
   );
 };
 
-export { BinaryDevider };

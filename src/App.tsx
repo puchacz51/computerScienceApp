@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './App.scss';
-import { NumberEqution } from './components/BinaryDevisor';
+import {  NumberEqution } from './components/BinaryDevisor';
 import { setNumberA, setNumberB, substract } from './store/operationSlice';
 import { useMySelector } from './store/store';
 import { binaryNumbVal } from './utilities/numberValidations';
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className='App'>
       <OperationForm />
-      xxx
+      <NumberEqution />
       {result && <pre>{JSON.stringify(result)}</pre>}xxx
     </div>
   );
