@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { stat } from 'fs';
-import { validate } from 'json-schema';
 import { binaryNumbVal } from '../utilities/numberValidations';
 import { substraction } from '../utilities/substraction';
 export interface OperationSlice {

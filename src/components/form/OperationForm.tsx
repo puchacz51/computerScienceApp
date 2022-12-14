@@ -6,7 +6,6 @@ import { FormProvider } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { substract } from '../../store/operationSlice';
 import { binaryNumbVal } from '../../utilities/numberValidations';
-import { number } from 'yargs';
 export default () => {
   const dispatch = useDispatch();
   const submitHandler = (data: any) => {
