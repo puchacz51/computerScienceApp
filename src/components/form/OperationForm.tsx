@@ -9,8 +9,7 @@ import { binaryNumbVal } from '../../utilities/numberValidations';
 export default () => {
   const dispatch = useDispatch();
   const submitHandler = (data: any) => {
-    console.log(1);
-    
+
     const validatedNumA = binaryNumbVal(data.numberA);
     const validatedNumB = binaryNumbVal(data.numberB);
     dispatch(substract({ numberA: validatedNumA, numberB: validatedNumB }));
@@ -21,11 +20,14 @@ export default () => {
   const { handleSubmit } = methods;
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form onSubmit={handleSubmit(submitHandler)} className='operationForm'>
         <NumberInput name='numberA' />
         <NumberInput name='numberB' />
 
-        <button type='submit'> calc</button>
+        <button type='submit' className='submitBtn'>
+          {' '}
+          calc
+        </button>
       </form>
       {JSON.stringify(methods.getValues())}
       {JSON.stringify(methods.formState.errors)}

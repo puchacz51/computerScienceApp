@@ -1,4 +1,3 @@
-
 export const substraction = (numberA: string[], numberB: string[]) => {
   // if length a is smaller than length b
   if (numberA.length < numberB.length)
@@ -10,7 +9,8 @@ export const substraction = (numberA: string[], numberB: string[]) => {
   let indexB = lengthB;
   let indexA: number;
   const result: string[] = [];
-  const higherIndex: string[][][]=[];
+  const higherIndex: string[][] = Array.from(Array(lengthA), () => []);
+  console.log(higherIndex);
 
   while (indexB--) {
     indexA = indexB + lengthDiff;
@@ -24,26 +24,19 @@ export const substraction = (numberA: string[], numberB: string[]) => {
       // if a bit = 0 b bit =1 result = 1
       let j = indexA;
       // find first older bit with 1 value
-      const tempArray = Array(lengthA)
-        .fill(0)
-        .map((_) => [] as string[]);
+
       while (--j >= 0) {
         if (numberA[j] === '1') {
           numberA[j] = '0';
-          console.log(j, 'xxx');
-          tempArray[j].push('0');
+          higherIndex[j].push('0');
           result.push('1');
           while (++j <= indexA) {
-            console.log(j, 'llll', indexA);
             numberA[j] = '1';
-            tempArray[j].push('2');
-            tempArray[j].push('1');
-            console.log(numberA, 'numberA');
+            higherIndex[j].push('2', '1');
           }
           break;
         }
       }
-      higherIndex.push(tempArray);
     }
   }
   indexA = lengthDiff;
@@ -51,7 +44,7 @@ export const substraction = (numberA: string[], numberB: string[]) => {
     result.push(numberA[indexA]);
   }
   console.log(higherIndex);
-  
+
   return {
     result: result.reverse().join(''),
     higherIndex,

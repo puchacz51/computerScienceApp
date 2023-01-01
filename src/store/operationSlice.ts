@@ -4,7 +4,7 @@ import { substraction } from '../utilities/substraction';
 export interface OperationSlice {
   numberA: string | null;
   numberB: string | null;
-  result: null | { result: string | null; higherIndex: string[][][] | null };
+  result: null | { result: string | null; higherIndex: string[][] | null };
 }
 const initialState: OperationSlice = {
   numberA: null,
@@ -21,18 +21,16 @@ const operationSlice = createSlice({
       action: PayloadAction<{ numberA: string; numberB: string }>
     ) => {
       console.log(action);
-      
+
       const numberA = binaryNumbVal(action.payload.numberA);
       const numberB = binaryNumbVal(action.payload.numberB);
 
       if (numberA === null || numberB === null) return;
       setNumberA(numberA);
       setNumberB(numberB);
-      state.numberA = numberA
-      state.numberB = numberB      
+      state.numberA = numberA;
+      state.numberB = numberB;
       const result = substraction(numberA.split(''), numberB.split(''));
-      console.log(result,'xxxx');
-      
       state.result = result;
     },
     setNumberA: (state, action: PayloadAction<string>) => {
